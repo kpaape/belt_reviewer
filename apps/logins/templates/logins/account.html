@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'logins/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Logins & Registration</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{%url 'logins:index' %}">Home</a></li><!--
+                --><li><a href="{%url 'logins:all_users' %}">All Users</a></li><!--
+                --><li><a href="{%url 'logins:account' %}">Account</a></li><!--
+                --><li><a href="{%url 'logins:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            {% if user %}
+                <p>User's ID: {{ user.id }}</p>
+                <p>User's Name: {{ user.first_name }} {{ user.last_name }}</p>
+                <p>User's Email: {{ user.email }}</p>
+                <p>Created at: {{ user.created_at }}</p>
+            {% endif %}
+        </main>
+        <footer>
+            placeholder footer © 2018
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+* {
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    background-color: var(--bg-primary);
+    color: var(--fg-color);
+}
+
+/* Make sure the :root is in the html file if you want there to be user customization */
+/*
+orange scheme
+    --primary-color: rgb(230, 100, 0);
+    --secondary-color: rgb(230, 200, 60);
+blue scheme
+    --primary-color: rgb(00, 100, 230);
+    --secondary-color: rgb(60, 200, 230);
+green
+    --primary-color: rgb(00, 230, 100);
+    --secondary-color: rgb(60, 230, 200);
+*/
+:root {
+    --primary-color: rgb(0, 120, 40);
+    --secondary-color: rgb(150, 200, 150);
+    --tertiary-color: rgb(60, 60, 60);
+    --bg-primary: rgb(30, 30, 30);
+    --bg-secondary: rgb(40, 40, 40);
+    --fg-color: white;
+    --container-width: 800px;
+    --pad-lg: 20px;
+    --pad-md: 10px;
+    --pad-sm: 5px;
+}
+
+header, main, footer {
+    padding: var(--pad-lg);
+}
+
+header {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    margin: 0;
+}
+
+nav {
+    background-color: var(--secondary-color);
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    margin: 0px;
+    padding: var(--pad-md) var(--pad-lg);
+    border-radius: 0;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+nav ul li a:hover {
+    background-color: var(--tertiary-color);
+    color: var(--fg-color);
+}
+
+main {
+    padding-bottom: 80px;
+    text-align: justify;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: calc(var(--container-width) - var(--pad-lg) * 2);
+    background-color: var(--tertiary-color);
+    text-align: center;
+}
+
+a, button {
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--pad-sm) var(--pad-md);
+    margin: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a:hover, button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid var(--tertiary-color);
+    padding: var(--pad-sm);
+}
+
+thead th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+tbody tr {
+    color: black;
+    background-color: white;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--secondary-color);
+}
+
+form {
+    width: 50%;
+    padding: var(--pad-md);
+    margin: 0 auto;
+}
+
+form label {
+    display: inline-block;
+    width: 100%;
+}
+
+form input {
+    width: calc(100% - var(--pad-sm) * 2);
+    border: none;
+    padding: var(--pad-sm);
+    margin: 5px 0;
+}
+
+form button[type="submit"] {
+    display: block;
+}
+
+#container {
+    width: var(--container-width);
+    height: 100%;
+    min-height: 100vh;
+    margin: 0px auto;
+    background-color: var(--bg-secondary);
+}
+
+#error_messages {
+    list-style-type: none;
+    margin: 0;
+    color: red;
+}
