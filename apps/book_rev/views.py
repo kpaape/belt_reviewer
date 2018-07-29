@@ -6,8 +6,6 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from .models import Book
 from .models import Review
-# may not need the above import for User
-import bcrypt
 
 # import user models
 from django.apps import apps
