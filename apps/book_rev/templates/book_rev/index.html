@@ -16,28 +16,31 @@
         <nav>
             <ul>
                 <li><a href="{%url 'logins:index' %}">Home</a></li><!--
-                --><li><a href="{%url 'logins:all_users' %}">All Users</a></li><!--
-                --><li><a href="{%url 'logins:account' %}">Account</a></li><!--
+                --><li><a href="{%url 'book_rev:add' %}">Add Review</a></li><!--
+                --><li><a href="{%url 'book_rev:show_user' id=request.session.current_user %}">Account</a></li><!--
                 --><li><a href="{%url 'logins:logout' %}">Logout</a></li>
             </ul>
         </nav>
         <main>
-            <h2>This is a placeholder index page</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales facilisis risus ut ultricies. Ut eget orci eu lorem suscipit eleifend. Quisque sollicitudin congue laoreet. Donec eleifend lacus id risus ultricies lobortis. Morbi tempor blandit luctus. Donec ut semper nisl. Donec ullamcorper metus a nisl suscipit consequat. Nulla non ultrices tortor.
-            </p>
-            <p>
-                Vestibulum id diam est. Mauris sit amet dui ac nisi vulputate vulputate. Quisque urna nulla, condimentum fermentum est non, volutpat sagittis magna. Morbi rhoncus, mi ut efficitur varius, est metus sodales magna, in eleifend mauris purus et odio. Vivamus lobortis elit ultrices nibh pretium facilisis. Fusce quis ipsum lacus. Mauris felis ligula, tempor vel aliquam ut, viverra eu ipsum. Nulla tempus tortor turpis, a convallis enim porttitor lacinia. Nullam ultricies diam a erat rhoncus semper ut venenatis nisl. Nulla vitae fermentum justo. Morbi accumsan libero scelerisque ultrices interdum. Maecenas est velit, lobortis iaculis sem et, convallis tristique lorem. Vivamus luctus nulla ac sem laoreet, ac rutrum dui convallis. Sed rutrum tempus iaculis. Quisque et rhoncus turpis, quis lacinia eros. Proin felis nunc, porttitor vitae justo vel, viverra laoreet orci.
-            </p>
-            <p>
-                Vestibulum id diam est. Mauris sit amet dui ac nisi vulputate vulputate. Quisque urna nulla, condimentum fermentum est non, volutpat sagittis magna. Morbi rhoncus, mi ut efficitur varius, est metus sodales magna, in eleifend mauris purus et odio. Vivamus lobortis elit ultrices nibh pretium facilisis. Fusce quis ipsum lacus. Mauris felis ligula, tempor vel aliquam ut, viverra eu ipsum. Nulla tempus tortor turpis, a convallis enim porttitor lacinia. Nullam ultricies diam a erat rhoncus semper ut venenatis nisl. Nulla vitae fermentum justo. Morbi accumsan libero scelerisque ultrices interdum. Maecenas est velit, lobortis iaculis sem et, convallis tristique lorem. Vivamus luctus nulla ac sem laoreet, ac rutrum dui convallis. Sed rutrum tempus iaculis. Quisque et rhoncus turpis, quis lacinia eros. Proin felis nunc, porttitor vitae justo vel, viverra laoreet orci.
-            </p>
-            <p>
-                Vestibulum id diam est. Mauris sit amet dui ac nisi vulputate vulputate. Quisque urna nulla, condimentum fermentum est non, volutpat sagittis magna. Morbi rhoncus, mi ut efficitur varius, est metus sodales magna, in eleifend mauris purus et odio. Vivamus lobortis elit ultrices nibh pretium facilisis. Fusce quis ipsum lacus. Mauris felis ligula, tempor vel aliquam ut, viverra eu ipsum. Nulla tempus tortor turpis, a convallis enim porttitor lacinia. Nullam ultricies diam a erat rhoncus semper ut venenatis nisl. Nulla vitae fermentum justo. Morbi accumsan libero scelerisque ultrices interdum. Maecenas est velit, lobortis iaculis sem et, convallis tristique lorem. Vivamus luctus nulla ac sem laoreet, ac rutrum dui convallis. Sed rutrum tempus iaculis. Quisque et rhoncus turpis, quis lacinia eros. Proin felis nunc, porttitor vitae justo vel, viverra laoreet orci.
-            </p>
-            <p>
-                Vestibulum id diam est. Mauris sit amet dui ac nisi vulputate vulputate. Quisque urna nulla, condimentum fermentum est non, volutpat sagittis magna. Morbi rhoncus, mi ut efficitur varius, est metus sodales magna, in eleifend mauris purus et odio. Vivamus lobortis elit ultrices nibh pretium facilisis. Fusce quis ipsum lacus. Mauris felis ligula, tempor vel aliquam ut, viverra eu ipsum. Nulla tempus tortor turpis, a convallis enim porttitor lacinia. Nullam ultricies diam a erat rhoncus semper ut venenatis nisl. Nulla vitae fermentum justo. Morbi accumsan libero scelerisque ultrices interdum. Maecenas est velit, lobortis iaculis sem et, convallis tristique lorem. Vivamus luctus nulla ac sem laoreet, ac rutrum dui convallis. Sed rutrum tempus iaculis. Quisque et rhoncus turpis, quis lacinia eros. Proin felis nunc, porttitor vitae justo vel, viverra laoreet orci.
-            </p>
+            {% if reviews %}
+                <h2>Recent Reviews:</h2>
+                {% for review in reviews %}
+                    <div class="review">
+                        <h3><a href="{%url 'book_rev:show' id=review.book.id %}">{{ review.book.name }}</a>: {{ review.book.author }}</h3>
+                        <p>{{ review.rating }}</p>
+                        <p><a href="{%url 'book_rev:show_user' id=review.user.id %}">{{ review.user.first_name }}</a>: {{ review.desc }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3>Sorry, there are no reviews found at this time.</h2>
+            {% endif %}
+
+            <div class="books">
+                <h3>Books with reviews:</h3>
+                {% for book in books %}
+                    <p><a href="{% url 'book_rev:show' id=book.id %}">{{ book.name }}: {{ book.author }}</a></p>
+                {% endfor %}
+            </div>
         </main>
         <footer>
             placeholder footer © 2018

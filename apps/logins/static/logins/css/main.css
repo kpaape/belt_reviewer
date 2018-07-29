@@ -85,7 +85,7 @@ footer {
     text-align: center;
 }
 
-a, button {
+button {
     display: inline-block;
     border: none;
     border-radius: 5px;
@@ -97,9 +97,19 @@ a, button {
     font-size: 16px;
 }
 
-a:hover, button:hover {
+button:hover {
     background-color: var(--tertiary-color);
     color: var(--primary-color);
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--fg-color);
+}
+
+a:hover {
+    color: var(--secondary-color);
 }
 
 table {
@@ -137,8 +147,20 @@ form label {
     width: 100%;
 }
 
-form input {
+form input, form textarea {
     width: calc(100% - var(--pad-sm) * 2);
+    border: none;
+    padding: var(--pad-sm);
+    margin: 5px 0;
+}
+
+form textarea {
+    height: 200px;
+    resize: none;
+}
+
+form select {
+    width: 50%;
     border: none;
     padding: var(--pad-sm);
     margin: 5px 0;
@@ -160,4 +182,21 @@ form button[type="submit"] {
     list-style-type: none;
     margin: 0;
     color: red;
+}
+
+
+/* Review specific */
+
+.books {
+    height: 250px;
+    background-color: var(--tertiary-color);
+    overflow-y: auto;
+    margin-bottom: var(--pad-lg);
+    padding: var(--pad-md);
+}
+
+.review {
+    background-color: var(--tertiary-color);
+    margin-bottom: var(--pad-lg);
+    padding: var(--pad-md);
 }

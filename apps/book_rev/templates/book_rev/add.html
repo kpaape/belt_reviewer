@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'logins/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Book Reviews</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{%url 'logins:index' %}">Home</a></li><!--
+                --><li><a href="{%url 'book_rev:add' %}">Add Review</a></li><!--
+                --><li><a href="{%url 'book_rev:show_user' id=request.session.current_user %}">Account</a></li><!--
+                --><li><a href="{%url 'logins:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            {% if messages %}
+                <ul id="error_messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="{%url 'book_rev:create' %}" method="POST">
+                {% csrf_token %}
+                <h2>Create Review</h2>
+                <input type="hidden" name="action" value="create_review">
+                <label for="name">Title:</label>
+                <input type="text" name="name" id="rev_name">
+
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="rev_author">
+
+                <label for="rating">Rating:</label>
+                <select name="rating" id="rev_rating">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Star</option>
+                    <option value="3">3 Star</option>
+                    <option value="4">4 Star</option>
+                    <option value="5">5 Star</option>
+                </select>
+
+                <label for="desc">Review:</label>
+                <textarea name="desc" id="rev_desc"></textarea>
+                <button type="submit">Create</button>
+            </form>
+        </main>
+        <footer>
+            placeholder footer © 2018
+        </footer>
+    </div>
+</body>
+</html>

@@ -12,7 +12,11 @@ import bcrypt
 def index(request):
     if not 'current_user' in request.session:
         request.session['current_user'] = ''
-    return render(request, 'logins/index.html')
+    if request.session['current_user'] == '':
+        return render(request, 'logins/index.html')
+    else:
+        print "sending to book index"
+        return redirect(reverse('book_rev:index'))
 
 def submit(request):
     if request.method == 'POST':
@@ -24,7 +28,7 @@ def submit(request):
                 return redirect(reverse('logins:login_reg'))
             else:
                 request.session['current_user'] = User.objects.get(email = request.POST['email']).id
-                return redirect(reverse('logins:account'))
+                return redirect(reverse('book_rev:index'))
             
         if request.POST['action'] == "register":
             errors = User.objects.basic_validator(request.POST)
@@ -36,7 +40,7 @@ def submit(request):
                 hash_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
                 user = User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = hash_pw)
                 request.session['current_user'] = user.id
-                return redirect(reverse('logins:account'))
+                return redirect(reverse('book_rev:index'))
     return redirect(reverse('logins:index'))
 
 def all_users(request):# this is for testing purposes only
