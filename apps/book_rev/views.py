@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, HttpResponse, redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from .models import Book
 from .models import Review
+
 
 # import user models
 from django.apps import apps
@@ -22,12 +23,21 @@ def index(request):
 
 def add(request):
     if request.session['current_user'] == '':
-        return render(request, 'logins/index.html')
+        return redirect(reverse('logins:index'))
     else:
         return render(request, 'book_rev/add.html')
 
 def create(request):
     if request.method == 'POST':
+        print request.POST['name']
+        context = {
+            'book_name': request.POST['name'],
+            'book_author': request.POST['author'],
+            'book_rating': request.POST['rating'],
+            'book_desc': request.POST['desc'],
+        }
+        print context['book_name']
+        print "*-" * 20
         errors = Review.objects.basic_validator(request.POST)
         if len(errors):
             for tag, error in errors.iteritems():
@@ -57,6 +67,8 @@ def delete(request, id):
     book_id = review.book.id
     if request.session['current_user'] == review.user.id:
         review.delete()
+    elif request.session['current_user'] == '':
+        return redirect('logins:index')
     return redirect(reverse('book_rev:show', kwargs={'id': book_id }))
 
 def show_user(request, id):

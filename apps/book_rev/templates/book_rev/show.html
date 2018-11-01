@@ -27,11 +27,17 @@
             {% if reviews %}
                 {% for review in reviews %}
                     <div class="review">
-                        <p>{{ review.rating }}</p>
-                        <p><a href="{%url 'book_rev:show_user' id=review.user.id %}">{{ review.user.first_name }}</a>: {{ review.desc }}</p>
-                        <p>{{ review.created_at }}</p>
+                        <span class="left">
+                            <a href="{%url 'book_rev:show_user' id=review.user.id %}">{{ review.user.first_name }}</a>: {{ review.rating }}
+                        </span><!--
+                        --><span class="right">
+                            {{ review.created_at }}
+                        </span>
+                        <p>{{ review.desc }}</p>
                         {% if review.user.id == request.session.current_user %}
-                            <a href="{%url 'book_rev:delete' id=review.id %}">Delete</a>
+                            <span class="delete">
+                                <a href="{%url 'book_rev:delete' id=review.id %}">Delete</a>
+                            </span>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -39,36 +45,34 @@
                 <h2>Sorry, no reviews for this book were found.</h2>
             {% endif %}
 
-            <div class="review">
-                {% if messages %}
-                    <ul id="error_messages">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-                <form action="{%url 'book_rev:create' %}" method="POST">
-                    {% csrf_token %}
-                    <h2>Create Review</h2>
-                    <input type="hidden" name="action" value="create_review">
-                    
-                    <input type="hidden" name="name" id="rev_name" value="{{ book.name }}">
-                    <input type="hidden" name="author" id="rev_author" value="{{ book.author }}">
+            {% if messages %}
+                <ul id="error_messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="{%url 'book_rev:create' %}" method="POST">
+                {% csrf_token %}
+                <h2>Create Review</h2>
+                <input type="hidden" name="action" value="create_review">
+                
+                <input type="hidden" name="name" id="rev_name" value="{{ book.name }}">
+                <input type="hidden" name="author" id="rev_author" value="{{ book.author }}">
 
-                    <label for="rating">Rating:</label>
-                    <select name="rating" id="rev_rating">
-                        <option value="★">1 Star</option>
-                        <option value="★★">2 Star</option>
-                        <option value="★★★">3 Star</option>
-                        <option value="★★★★">4 Star</option>
-                        <option value="★★★★★">5 Star</option>
-                    </select>
+                <label for="rating">Rating:</label>
+                <select name="rating" id="rev_rating">
+                    <option value="★">1 Star</option>
+                    <option value="★★">2 Star</option>
+                    <option value="★★★">3 Star</option>
+                    <option value="★★★★">4 Star</option>
+                    <option value="★★★★★">5 Star</option>
+                </select>
 
-                    <label for="desc">Review:</label>
-                    <textarea name="desc" id="rev_desc"></textarea>
-                    <button type="submit">Create</button>
-                </form>
-            </div>
+                <label for="desc">Review:</label>
+                <textarea name="desc" id="rev_desc"></textarea>
+                <button type="submit">Create</button>
+            </form>
         </main>
         <footer>
             placeholder footer © 2018

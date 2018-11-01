@@ -3,13 +3,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    width: 100%;
-    margin: 0;
-    background-color: var(--bg-primary);
-    color: var(--fg-color);
-}
-
 /* Make sure the :root is in the html file if you want there to be user customization */
 /*
 orange scheme
@@ -26,13 +19,26 @@ green
     --primary-color: rgb(0, 120, 40);
     --secondary-color: rgb(150, 200, 150);
     --tertiary-color: rgb(60, 60, 60);
-    --bg-primary: rgb(30, 30, 30);
-    --bg-secondary: rgb(40, 40, 40);
-    --fg-color: white;
+    --bg-primary: rgb(230, 230, 230);
+    --bg-secondary: rgb(255, 255, 255);
+	--grad-primary: linear-gradient(rgb(80, 80, 80), rgb(30, 30, 30));
+    --grad-secodary: linear-gradient(rgb(140, 140, 140), rgb(60, 60, 60));
+	--grad-angular: repeating-linear-gradient(-45deg, rgb(60,60,60), rgb(60,60,60) 5px, rgb(0,0,0) 5px, rgb(0,0,0) 10px);
+	--grad-angular-2: repeating-linear-gradient(45deg, rgba(60,60,60,0.5), rgba(60,60,60,0.5) 5px, rgba(0,0,0,0.5) 5px, rgba(0,0,0,0.5) 10px);
+    --grad-radial: repeating-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    --fg-color: black;
     --container-width: 800px;
     --pad-lg: 20px;
     --pad-md: 10px;
     --pad-sm: 5px;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    background-color: var(--bg-primary);
+    background: var(--grad-radial), var(--grad-angular-2), var(--grad-angular);
+    color: var(--fg-color);
 }
 
 header, main, footer {
@@ -43,11 +49,32 @@ header {
     color: var(--secondary-color);
     background-color: var(--primary-color);
     margin: 0;
+    height: 200px;
+    font-weight: bold;
+    position: relative;
+}
+
+header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+header h1 {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    color: white;
+    text-shadow: 0 3px 5px black;
 }
 
 nav {
     background-color: var(--secondary-color);
+    background: var(--grad-primary);
     margin: 0;
+    position: sticky;
+    top: 0;
 }
 
 nav ul {
@@ -64,24 +91,27 @@ nav ul li a {
     padding: var(--pad-md) var(--pad-lg);
     border-radius: 0;
     background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background: var(--grad-primary);
+    color: var(--secondary-color);
 }
 
 nav ul li a:hover {
-    background-color: var(--tertiary-color);
-    color: var(--fg-color);
+    background-color: var(--primary-color);
+    background: var(--grad-secodary);
+    color: white;
 }
 
 main {
-    padding-bottom: 80px;
     text-align: justify;
+    padding-bottom: 80px;
 }
 
 footer {
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     width: calc(var(--container-width) - var(--pad-lg) * 2);
-    background-color: var(--tertiary-color);
+    width: calc(100% - var(--pad-lg) * 2);
+    background-color: var(--secondary-color);
     text-align: center;
 }
 
@@ -98,8 +128,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--tertiary-color);
-    color: var(--primary-color);
+    background-color: var(--secondary-color);
 }
 
 a {
@@ -109,7 +138,7 @@ a {
 }
 
 a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 table {
@@ -149,7 +178,7 @@ form label {
 
 form input, form textarea {
     width: calc(100% - var(--pad-sm) * 2);
-    border: none;
+    border: 2px solid var(--secondary-color);
     padding: var(--pad-sm);
     margin: 5px 0;
 }
@@ -161,7 +190,7 @@ form textarea {
 
 form select {
     width: 50%;
-    border: none;
+    border: 2px solid var(--secondary-color);
     padding: var(--pad-sm);
     margin: 5px 0;
 }
@@ -171,7 +200,8 @@ form button[type="submit"] {
 }
 
 #container {
-    width: var(--container-width);
+    position: relative;
+    max-width: var(--container-width);
     height: 100%;
     min-height: 100vh;
     margin: 0px auto;
@@ -185,18 +215,74 @@ form button[type="submit"] {
 }
 
 
+/* dropdown setup ≡ */
+
+.dropdown {
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--secondary-color);
+    width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* response */
+
+@media only screen and (max-width: 500px){
+    header {
+        font-size: 70%;
+        padding: var(--pad-sm) var(--pad-lg);
+    }
+    form {
+        width: 75%;
+    }
+}
+
+@media only screen and (min-width: 501px){
+    form {
+        width: 75%;
+    }
+}
+
+@media only screen and (min-width: 810px){
+    form {
+        width: 50%;
+    }
+}
+
 /* Review specific */
 
 .books {
     height: 250px;
-    background-color: var(--tertiary-color);
+    background-color:var(--bg-primary);
     overflow-y: auto;
     margin-bottom: var(--pad-lg);
     padding: var(--pad-md);
 }
 
 .review {
-    background-color: var(--tertiary-color);
+    background-color: var(--bg-primary);
     margin-bottom: var(--pad-lg);
     padding: var(--pad-md);
+}
+
+.left, .right {
+    display: inline-block;
+    width: 50%;
+}
+
+.right, .delete {
+    text-align: right;
+}
+
+.delete {
+    display: inline-block;
+    width: 100%;
 }

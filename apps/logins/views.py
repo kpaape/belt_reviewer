@@ -25,7 +25,7 @@ def submit(request):
             if len(errors):
                 for tag, error in errors.iteritems():
                     messages.error(request, error, extra_tags=tag)
-                return redirect(reverse('logins:login_reg'))
+                return redirect(reverse('logins:index'))
             else:
                 request.session['current_user'] = User.objects.get(email = request.POST['email']).id
                 return redirect(reverse('book_rev:index'))
@@ -35,7 +35,7 @@ def submit(request):
             if len(errors):
                 for tag, error in errors.iteritems():
                     messages.error(request, error, extra_tags=tag)
-                return redirect(reverse('logins:login_reg'))
+                return redirect(reverse('logins:index'))
             else:
                 hash_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
                 user = User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = hash_pw)
