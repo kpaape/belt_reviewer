@@ -25,7 +25,7 @@ SECRET_KEY = 'os&n6mdgbd730)qsm(7oy0&dyc!kwy2en3=%7%ww-cv^g9r_d='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://kp-book-reviews.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
