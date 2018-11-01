@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>All Users</title>
+    <title>Book Reviews</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <link rel="stylesheet" href="{% static 'logins/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
@@ -11,15 +11,15 @@
 <body>
     <div id="container">
         <header>
-            <h1>Logins & Registration</h1>
+            <img src="{% static 'book_rev/images/books.jpeg' %}">
+            <h1>Book Reviews</h1>
         </header>
         <nav>
             <ul>
                 <li><a href="{%url 'logins:index' %}">Home</a></li><!--
                 --><li><a href="{%url 'book_rev:add' %}">Add Review</a></li><!--
                 --><li><a href="{%url 'logins:account' %}">Account</a></li><!--
-                --><li><a href="{%url 'logins:logout' %}">Logout</a></li><!--
-                --><li><a href="{%url 'logins:all_users' %}">All Users</a></li>
+                --><li><a href="{%url 'logins:logout' %}">Logout</a></li>
             </ul>
         </nav>
         <main>

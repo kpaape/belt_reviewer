@@ -41,7 +41,7 @@ body {
     color: var(--fg-color);
 }
 
-header, main, footer {
+main, footer {
     padding: var(--pad-lg);
 }
 
